@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ListRowView: View {
+    @EnvironmentObject var listViewModel:ListViewModel
     let item:ItemModel
     var body: some View {
         HStack{
             Image(systemName: item.isCompleted ? "checkmark.circle":"circle")
                 .foregroundColor(item.isCompleted ? Color.green:Color.red)
+                .onTapGesture {
+                    listViewModel.toggleCompletion(item: item)
+                }
             Text(item.title)
             Spacer()
         }
